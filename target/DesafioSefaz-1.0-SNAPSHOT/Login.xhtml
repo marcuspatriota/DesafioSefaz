@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </h:head>
+
+    <ui:define name="content">
+
+    <p:fieldset legend="CADASTRO DE USUARIO" id="fieldSetFormTitle" >
+        <h:form id="formRegisterUser">
+
+            <!-- Show a gif image to loading ajax user requests -->
+            <p:ajaxStatus>
+                <f:facet name="start">
+                    <h:graphicImage library="images" name="loading.gif"/>
+                    <h:outputLabel value="Aguarde..."/>
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value=""/>
+                </f:facet>
+            </p:ajaxStatus>
+
+            <p:growl id="msgUserForm" life="7000" />
+            <h:panelGrid columns="2" cellpadding="2" >
+
+                <p:outputLabel/>
+                <h:inputHidden id="idUser" />
+
+                <p:outputLabel for="name" value="Nome: "/>
+                <p:inputText id="name" maxlength="50" placeholder="Nome do Usuário" 
+                             value="#{usuarioBean.usuario.nome}" required="true" />
+
+                <p:outputLabel for="senha" value="Senha: "/>
+                <p:inputText id="value" styleClass="money" placeholder="Senha do Usuário"  
+                             maxlength="15" value="#{usuarioBean.usuario.senha}">
+                    <f:convertNumber type="number" locale="pt_BR"/>
+                </p:inputText>
+
+            </h:panelGrid>
+
+            <p:toolbar id="panelButtonsService" style="margin-top: 10px;">
+                <p:toolbarGroup>
+                    <p:commandButton style="font-size: 13px;" value="Salvar" id="saveButton" 
+                                     update="@form" icon="ui-icon ui-icon-disk" 
+                                     action="#{usuarioBean.service.create}"/>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+                    <p:button value="Novo cadastro" id="newRegister"  
+                              icon="ui-icon ui-icon-pencil"/>
+                    <p:button style="font-size: 13px;" value="Pesquisar" 
+                              id="search" icon="ui-icon ui-icon-search"/>
+                </p:toolbarGroup>
+            </p:toolbar> 
+        </h:form>
+    </p:fieldset>
+</ui:define>
+</ui:composition>
